@@ -1,7 +1,8 @@
 import logging
 
-from fastapi import APIRouter, File, HTTPException, UploadFile, status
+from fastapi import APIRouter, Depends, File, HTTPException, UploadFile, status
 
+from app.auth import verify_api_key
 from app.schemas.image import AnalyzeRequest, AnalyzeResponse, UploadResponse
 from app.services.analysis_service import analyze_image
 from app.services.storage_service import get_cached_result, store_result
@@ -9,7 +10,7 @@ from app.services.upload_service import save_uploaded_file
 from app.utils.file_utils import image_exists
 
 logger = logging.getLogger(__name__)
-router = APIRouter()
+router = APIRouter(dependencies=[Depends(verify_api_key)])
 
 
 @router.post(
