@@ -2,6 +2,17 @@
 
 A FastAPI backend service that allows uploading images and performing mock analysis.
 
+## 🚀 Live Demo & Documentation
+
+**Live Swagger UI:** http://personal-image-api-amfnxc-be0ca7-72-62-20-215.traefik.me/docs
+**Test API Key:** `dev-api-key-123`
+
+1. Go to the link above.
+2. Click **Authorize**.
+3. Enter the API key: `dev-api-key-123`.
+
+_Local docs available at `http://localhost:8000/docs` when running locally._
+
 ## Running the Service
 
 ### Option 1: Local Development (uv)
