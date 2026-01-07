@@ -2,23 +2,43 @@
 
 A FastAPI backend service that allows uploading images and performing mock analysis.
 
-## Setup
+## Running the Service
 
-### Prerequisites
+### Option 1: Local Development (uv)
+
+**Prerequisites:**
 
 - Python 3.13+
 - [uv](https://docs.astral.sh/uv/) package manager
 
-### Installation
+**Install dependencies:**
 
 ```bash
 uv sync
 ```
 
-## Running the Service
+**Run the server:**
 
 ```bash
 uv run fastapi dev app/main.py
+```
+
+The API will be available at `http://localhost:8000`
+
+---
+
+### Option 2: Docker
+
+**Build the image:**
+
+```bash
+docker build -t image-api .
+```
+
+**Run the container:**
+
+```bash
+docker run -p 8000:80 -e API_KEY=your-secret-key image-api
 ```
 
 The API will be available at `http://localhost:8000`
@@ -145,23 +165,28 @@ If this were a production service, I would:
 7. **Background Processing**: Use Celery for async analysis of large images
 8. **Monitoring**: Add Prometheus metrics and structured logging
 9. **Testing**: Add comprehensive unit and integration tests
-10. **Docker**: Containerize the application for consistent deployments
 
 ## Project Structure
 
 ```
-app/
-├── main.py           # FastAPI application entry point
-├── config.py         # Configuration settings
-├── auth.py           # API key authentication
-├── routes/
-│   └── image.py      # Route handlers
-├── services/
-│   ├── upload_service.py    # File upload logic
-│   ├── analysis_service.py  # Mock analysis logic
-│   └── storage_service.py   # Result caching
-├── schemas/
-│   └── image.py      # Pydantic models
-└── utils/
-    └── file_utils.py # Utility functions
+image-api/
+├── Dockerfile
+├── .dockerignore
+├── pyproject.toml
+├── uv.lock
+├── README.md
+└── app/
+    ├── main.py               # FastAPI application entry point
+    ├── config.py             # Configuration settings
+    ├── auth.py               # API key authentication
+    ├── routes/
+    │   └── image.py          # Route handlers
+    ├── services/
+    │   ├── upload_service.py     # File upload logic
+    │   ├── analysis_service.py   # Mock analysis logic
+    │   └── storage_service.py    # Result caching
+    ├── schemas/
+    │   └── image.py          # Pydantic models
+    └── utils/
+        └── file_utils.py     # Utility functions
 ```
